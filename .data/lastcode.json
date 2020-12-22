@@ -1,0 +1,32 @@
+{
+  "title": "Latest Promo Code",
+  "color": 9685227,
+  "fields": [
+    {
+      "name": "Reward",
+      "value": "100 Primogems, 10x Mystic Enhancement Ore",
+      "inline": true
+    },
+    {
+      "name": "Expired",
+      "value": "Yes",
+      "inline": true
+    },
+    {
+      "name": "EU",
+      "value": "5KVeIbSxDUU",
+      "inline": false
+    },
+    {
+      "name": "NA",
+      "value": "5KVeIbSxDUU",
+      "inline": false
+    },
+    {
+      "name": "SEA",
+      "value": "5KVeIbSxDUU",
+      "inline": false
+    }
+  ],
+  "timestamp": "2020-12-22T08:31:02.149Z"
+}

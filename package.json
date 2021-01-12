@@ -1,13 +1,14 @@
 {
   "name": "genshin-impact-promo-code-webhook",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Discord webhook to get the latest Genshin Impact Promo Code/s",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Genshin impact", "Promocode", "webhook", "discord"],
+  "author": "Josh Lawson",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.0",

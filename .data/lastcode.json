@@ -4,29 +4,29 @@
   "fields": [
     {
       "name": "Reward",
-      "value": "100 Primogems, 10x Mystic Enhancement Ore",
+      "value": "50 Primogems",
       "inline": true
     },
     {
       "name": "Expired",
-      "value": "Yes",
+      "value": "No",
       "inline": true
     },
     {
       "name": "EU",
-      "value": "5KVeIbSxDUU",
+      "value": "Cuupmbjsvd",
       "inline": false
     },
     {
       "name": "NA",
-      "value": "5KVeIbSxDUU",
+      "value": "Cuupmbjsvd",
       "inline": false
     },
     {
       "name": "SEA",
-      "value": "5KVeIbSxDUU",
+      "value": "Cuupmbjsvd",
       "inline": false
     }
   ],
-  "timestamp": "2020-12-22T08:31:02.149Z"
+  "timestamp": "2021-01-12T02:06:11.142Z"
 }

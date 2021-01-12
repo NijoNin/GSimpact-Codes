@@ -1,3 +1,4 @@
+require('dotenv').config();
 const axios = require('axios').default;
 const cheerio = require('cheerio');
 const { CronJob } = require('cron');
@@ -7,15 +8,27 @@ const cron = require('cron').CronJob;
 const http = require('http');
 
 const url = "https://www.gensh.in/events/promotion-codes";
-const path = "./.data/lastcode.json";
+const dir = "./.data"
+const path = dir + "/lastcode.json";
 
 const hookToken = process.env.WEBHOOK_TOKEN;
 const hookId = process.env.WEBHOOK_ID;
 
 var params;
 
+// for first time entering server or restarting bot
+sendWebhook();
+
 // Schedule when you want the function to activate, Use cron formatting to edit timing
+// Every hour from minute zero of the hour '0 * * * *'.
 var job = new CronJob('0 * * * *', function () {
+
+  sendWebhook();
+}, null, true, 'Pacific/Auckland');
+job.start();
+
+// The main function to find, get and send the promo code to discord server
+function sendWebhook() {
 
   // Gets the HTML data from promo code website
   axios(url)
@@ -29,7 +42,7 @@ var job = new CronJob('0 * * * *', function () {
       var isValid = true;
       var i = 0;
       var lastcode;
-      console.log("First check complete - table row test: " + codeTable.eq(0).text());
+      console.log(new Date().toLocaleString('en-US', {timeZone: 'Pacific/Auckland'}) + ": First check complete - table row test: " + codeTable.eq(0).text());
 
       // Checks if the .json file with the last code exists, if so, get the code ready to compare
       if (fs.existsSync(path)) {
@@ -37,9 +50,15 @@ var job = new CronJob('0 * * * *', function () {
         let rawdata = fs.readFileSync(path);
         lastcode = JSON.parse(rawdata).fields[2].value;
         console.log("Successfully retrieved last code: " + lastcode);
-      }
+      } else {
 
-      // remember to remove '&& i < 4' in while condition (testing purposes)
+                // If file doesnt exist, webhook is new to server, send message saying thank you for using 
+                // and first codes may have already been used as this is a starter check
+                iniMsg = "Thank you for using my Genshin Promocode webhook. The first codes you may see may have already been used, this is the webhook initialising";
+
+            }
+
+      // main check to test if promocode is valid or not
       while (isValid === true) {
 
         if (codeTable.eq(i).children().eq(1).text().trim() === "Yes") {
@@ -89,6 +108,7 @@ var job = new CronJob('0 * * * *', function () {
 
             });
 
+            console.log(LatestPromoCode);
             i++;
           }
 
@@ -101,12 +121,18 @@ var job = new CronJob('0 * * * *', function () {
         return;
       }
 
-      console.log(LatestPromoCode);
+      
       console.log("Expired check: Complete, Latest code check: Complete, Embed/s Created");
+
+      // Makes directory if doesn't exist.
+      if (!fs.existsSync(dir)){
+          fs.mkdirSync(dir);
+      }
 
       // Adds latest code to the JSON file
       let data = JSON.stringify(LatestPromoCode[0], null, 2);
       fs.writeFileSync(path, data);
+      console.log("Saved lastest Code to JSON");
 
       // Webhook post parameters
       params = {
@@ -115,25 +141,28 @@ var job = new CronJob('0 * * * *', function () {
         content: "",
         embeds: []
       }
+      console.log("Webhook params created");
 
       //Dynamically adds each embed into the webhook post
       for (var x in LatestPromoCode) {
 
         params.embeds.push(LatestPromoCode[x]);
       }
+      console.log("Inserted latest promocode/s into webhook");
 
       // webhook client URL (webhook ID and Token in .env file), you must get your own from discord 
       // when you create a webhook on a certain channel.
       const hook = new Discord.WebhookClient(hookId, hookToken);
+      console.log("initialise webhook client");
 
       // send your message/embed to the discord channel you chose
       hook.send(params);
-
+      console.log("Webhook sent");
     })
     .catch(console.error);
-}, null, true, 'Pacific/Auckland');
-job.start();
+}
 
+// This is specifically for repl so that this program can get pinged and kept awake 24/7
 const server = http.createServer((req, res) => {
   res.writeHead(200);
   res.end('ok');

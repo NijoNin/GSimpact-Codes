@@ -4,7 +4,7 @@
   "fields": [
     {
       "name": "Reward",
-      "value": "60 Primogems, 10000 Mora",
+      "value": "50 Primogems",
       "inline": true
     },
     {
@@ -14,19 +14,19 @@
     },
     {
       "name": "EU",
-      "value": "GSIMPTq125",
+      "value": "Cuupmbjsvd",
       "inline": false
     },
     {
       "name": "NA",
-      "value": "GSIMPTq125",
+      "value": "Cuupmbjsvd",
       "inline": false
     },
     {
       "name": "SEA",
-      "value": "GSIMPTq125",
+      "value": "Cuupmbjsvd",
       "inline": false
     }
   ],
-  "timestamp": "2020-12-26T04:36:01.273Z"
+  "timestamp": "2021-01-11T05:30:00.869Z"
 }

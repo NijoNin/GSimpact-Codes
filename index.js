@@ -138,7 +138,7 @@ function sendWebhook() {
       params = {
         username: "Handy Genshin Things",
         avatar_url: "",
-        content: "",
+        content: iniMsg,
         embeds: []
       }
       console.log("Webhook params created");

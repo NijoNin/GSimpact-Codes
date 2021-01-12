@@ -2,7 +2,7 @@
 A Discord Webhook Webscraper that finds the latest Promo Codes for Genshin Impact
 
 ## Features
-- Checks for latest Genshin Promo codes on the hour every hour (default) from the site [gensh.in](https://www.gensh.in/)
+- Checks for latest Genshin Promo codes on the hour every hour (default) from the site [gensh.in](https://www.gensh.in/events/promotion-codes)
 
 ## Requirements
 - Node

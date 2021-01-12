@@ -5,7 +5,6 @@ const { CronJob } = require('cron');
 const Discord = require('discord.js');
 const fs = require('fs');
 const cron = require('cron').CronJob;
-const http = require('http');
 
 const url = "https://www.gensh.in/events/promotion-codes";
 const dir = "./.data"
@@ -161,10 +160,3 @@ function sendWebhook() {
     })
     .catch(console.error);
 }
-
-// This is specifically for repl so that this program can get pinged and kept awake 24/7
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('ok');
-});
-server.listen(3000);  
